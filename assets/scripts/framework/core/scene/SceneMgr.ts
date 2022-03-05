@@ -62,7 +62,7 @@ export class SceneMgr extends EventMgr implements ISceneListener{
         transition.scale = 10;
 
         transition.x = transition.width / 2;
-        transition.y = transition.height / 2;
+        transition.y = transition.height / 2; 
 
         transition.name = "transition";
         // cc.assetManager.main
