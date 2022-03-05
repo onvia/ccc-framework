@@ -1,0 +1,52 @@
+{
+  "name": "ccc-skeleton-viewer",
+  "version": "1.0.2.20210709",
+  "description": "用于快速预览骨骼动画，提供独立窗口，也可以附着在编辑器中...",
+  "author": {
+    "name": "ifaswind（陈皮皮）",
+    "email": "952157129@qq.com",
+    "url": "https://chenpipi.cn",
+    "wechat": "im_chenpipi",
+    "git-home": "https://gitee.com/ifaswind",
+    "official-account": "公众号「菜鸟小栈」"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/ifaswind/ccc-skeleton-viewer"
+  },
+  "license": "MIT",
+  "main": "src/main.js",
+  "main-menu": {
+    "i18n:MAIN_MENU.package.title/i18n:ccc-skeleton-viewer.name/i18n:ccc-skeleton-viewer.view": {
+      "message": "ccc-skeleton-viewer:open-view-panel",
+      "icon": "/images/view.png"
+    },
+    "i18n:MAIN_MENU.package.title/i18n:ccc-skeleton-viewer.name/i18n:ccc-skeleton-viewer.setting": {
+      "message": "ccc-skeleton-viewer:open-setting-panel",
+      "icon": "/images/setting.png"
+    },
+    "i18n:MAIN_MENU.package.title/i18n:ccc-skeleton-viewer.name/i18n:ccc-skeleton-viewer.checkUpdate": {
+      "message": "ccc-skeleton-viewer:force-check-update",
+      "icon": "/images/update.png"
+    }
+  },
+  "panel.view": {
+    "main": "src/renderer/view/main.js",
+    "type": "dockable",
+    "title": "i18n:ccc-skeleton-viewer.name",
+    "width": 500,
+    "height": 600,
+    "min-width": 300,
+    "min-height": 250
+  },
+  "reload": {
+    "renderer": [
+      "src/renderer/**/*"
+    ],
+    "ignore": [
+      "CHANGELOG.md",
+      "README.md",
+      "README.en.md"
+    ]
+  }
+}

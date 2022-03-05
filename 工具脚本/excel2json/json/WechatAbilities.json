@@ -1,0 +1,56 @@
+[
+  {
+    "reward": {
+      "val": 3,
+      "type": 1
+    },
+    "id": 1,
+    "key": "cus",
+    "desc": "ui.wx.ability.customer_service"
+  },
+  {
+    "reward": {
+      "val": 3,
+      "type": 1
+    },
+    "id": 2,
+    "key": "pub",
+    "desc": "ui.wx.ability.pub"
+  },
+  {
+    "reward": {
+      "val": 3,
+      "type": 1
+    },
+    "view": "WechatSubscription",
+    "ico": "ui_ico_alert",
+    "enable": 1,
+    "id": 3,
+    "key": "sub",
+    "desc": "ui.wx.ability.sub"
+  },
+  {
+    "reward": {
+      "val": 3,
+      "type": 1
+    },
+    "view": "WechatSceneMyAppView",
+    "ico": "ui_ico_add_minigame",
+    "enable": 1,
+    "id": 4,
+    "key": "myapp",
+    "desc": "ui.wx.ability.myapp"
+  },
+  {
+    "reward": {
+      "val": 3,
+      "type": 1
+    },
+    "view": "WechatSceneFloatWindow",
+    "ico": "ui_ico_float",
+    "enable": 1,
+    "id": 5,
+    "key": "fwin",
+    "desc": "ui.wx.ability.fwin"
+  }
+]

@@ -1,0 +1,53 @@
+[{
+  "NativeCtrl": {
+    "insertTime": 30,
+    "iconTime": 20,
+    "delay": 60,
+    "bannerTime": 30,
+    "icon": 1,
+    "banner": 0,
+    "insert": 1
+  },
+  "OfflineTime": 300,
+  "InsertCtrl": {
+    "Main": 3,
+    "Success": 3,
+    "Fail": 3
+  },
+  "UseShare": 0,
+  "isAudit": 0,
+  "BannerTime": 60,
+  "BannerCtrl": {
+    "All": 1,
+    "VictoryView": 1,
+    "FailureView": 1
+  },
+  "OfflineReward": [
+    {
+      "val": 1,
+      "odds": 50,
+      "type": 1
+    },
+    {
+      "val": 1,
+      "odds": 30,
+      "type": 2
+    },
+    {
+      "val": 2,
+      "odds": 10,
+      "type": 1
+    },
+    {
+      "val": 2,
+      "odds": 10,
+      "type": 2
+    }
+  ],
+  "ESSData": {
+    "videoRecove": 2,
+    "recoveTime": 300,
+    "maxValue": 5,
+    "shareRecove": 2
+  }
+}]

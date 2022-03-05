@@ -1,0 +1,186 @@
+[
+  {
+    "name": "ui.title.level",
+    "en": "LEVEL",
+    "zh": "等级"
+  },
+  {
+    "name": "ui.des.checkpoint",
+    "en": "Level",
+    "zh": "关卡"
+  },
+  {
+    "name": "ui.des.free",
+    "en": "FREE",
+    "zh": "免费"
+  },
+  {
+    "name": "ui.des.max",
+    "en": "MAX",
+    "zh": "MAX"
+  },
+  {
+    "name": "ui.des.resurrection",
+    "en": "Resurrect and fight again!",
+    "zh": "不要放弃！复活再战！"
+  },
+  {
+    "name": "ui.btn.start",
+    "en": "Start",
+    "zh": "开始"
+  },
+  {
+    "name": "ui.btn.faststart",
+    "en": "Start",
+    "zh": "快速开始"
+  },
+  {
+    "name": "ui.btn.continue.game",
+    "en": "Continue",
+    "zh": "继续游戏"
+  },
+  {
+    "name": "ui.btn.next",
+    "en": "Next",
+    "zh": "下一关"
+  },
+  {
+    "name": "ui.btn.back",
+    "en": "Back",
+    "zh": "返回"
+  },
+  {
+    "name": "ui.btn.skip_lv",
+    "en": "skip",
+    "zh": "跳过关卡"
+  },
+  {
+    "name": "ui.btn.skip",
+    "en": "skip",
+    "zh": "跳过"
+  },
+  {
+    "name": "ui.btn.onceagain",
+    "en": "Once again",
+    "zh": "再次获得"
+  },
+  {
+    "name": "ui.title.supplementgold",
+    "en": "Supplement Gold",
+    "zh": "补充金币"
+  },
+  {
+    "name": "ui.title.supplementenergy",
+    "en": "Supplement Energy",
+    "zh": "补充体力"
+  },
+  {
+    "name": "ui.title.resurrection",
+    "en": "Resurrection",
+    "zh": "复活"
+  },
+  {
+    "name": "ui.title.victory",
+    "en": "Victory",
+    "zh": "胜利"
+  },
+  {
+    "name": "ui.title.failure",
+    "en": "Failure",
+    "zh": "失败"
+  },
+  {
+    "name": "ui.sw.off",
+    "en": "OFF",
+    "zh": "关"
+  },
+  {
+    "name": "ui.sw.on",
+    "en": "ON",
+    "zh": "开"
+  },
+  {
+    "name": "store.supply.life.des",
+    "zh": "角色最大生命值"
+  },
+  {
+    "name": "store.supply.niubility.des",
+    "zh": "无敌道具持续时间"
+  },
+  {
+    "name": "store.supply.fastreload.des",
+    "zh": "急速换弹道具持续时间"
+  },
+  {
+    "name": "store.supply.fastshoot.des",
+    "zh": "急速射击道具持续时间"
+  },
+  {
+    "name": "guide.des.step1",
+    "en": "Control character movement",
+    "zh": "控制角色移动"
+  },
+  {
+    "name": "guide.des.step2",
+    "en": "Control character jumps",
+    "zh": "控制角色跳跃"
+  },
+  {
+    "name": "guide.des.step3",
+    "en": "Press the fire button",
+    "zh": "按下开火键"
+  },
+  {
+    "name": "guide.des.step4",
+    "en": "You found a submachine gun",
+    "zh": "你找到了一把冲锋枪"
+  },
+  {
+    "name": "guide.des.step5",
+    "en": "Experience the firepower",
+    "zh": "体验一下强大的火力吧"
+  },
+  {
+    "name": "guide.des.step6",
+    "en": "Be careful hand grenades!",
+    "zh": "小心手雷！"
+  },
+  {
+    "name": "guide.des.step7",
+    "en": "After the death of the resurrection here",
+    "zh": "死亡后在这里复活"
+  },
+  {
+    "name": "guide.des.step8",
+    "en": "Press the jump key to enter the portal",
+    "zh": "按跳跃键进入传送门"
+  },
+  {
+    "name": "guide.des.step9",
+    "zh": "解锁枪械"
+  },
+  {
+    "name": "guide.des.step10",
+    "zh": "购买手雷"
+  },
+  {
+    "name": "guide.des.step11",
+    "zh": "选择关卡"
+  },
+  {
+    "name": "guide.des.step12",
+    "zh": "快速开始"
+  },
+  {
+    "name": "plot.des.step1",
+    "zh": "邪恶的敌人袭击了城市"
+  },
+  {
+    "name": "plot.des.step2",
+    "zh": "灾难降临到了每个人头上"
+  },
+  {
+    "name": "plot.des.step3",
+    "zh": "去吧！消灭他们！"
+  }
+]

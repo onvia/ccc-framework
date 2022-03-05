@@ -1,0 +1,34 @@
+[{
+  "GameSuccessXN": [
+    {
+      "val": 2,
+      "pro": 80
+    },
+    {
+      "val": 3,
+      "pro": 60
+    },
+    {
+      "val": 4,
+      "pro": 30
+    },
+    {
+      "val": 5,
+      "pro": 5
+    }
+  ],
+  "ReviveCeil": 1,
+  "SupplementEnergyPrice": 1000,
+  "OnlineGift": {
+    "gold": 400,
+    "time": 300
+  },
+  "ReviveGold": 1000,
+  "HardCeil": 2,
+  "LevelPageGift": [
+    200,
+    300,
+    400
+  ],
+  "SupplementGoldValue": 300
+}]

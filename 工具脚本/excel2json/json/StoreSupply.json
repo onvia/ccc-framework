@@ -1,0 +1,199 @@
+[
+  {
+    "uid": 2002,
+    "itemImg": "s_29",
+    "item1": [
+      {
+        "price": 200,
+        "val1": 1,
+        "type": 0
+      },
+      {
+        "price": 2,
+        "val1": 2,
+        "type": 1
+      },
+      {
+        "price": 200,
+        "val1": 3,
+        "type": 0
+      },
+      {
+        "price": 3,
+        "val1": 4,
+        "type": 1
+      },
+      {
+        "price": 400,
+        "val1": 5,
+        "type": 0
+      },
+      {
+        "price": 600,
+        "val1": 6,
+        "type": 0
+      },
+      {
+        "price": 800,
+        "val1": 7,
+        "type": 0
+      }
+    ],
+    "format": "x{0}",
+    "id": 1,
+    "icoImg": "s_21",
+    "desc": "store.supply.life.des"
+  },
+  {
+    "uid": 2006,
+    "itemImg": "s_32",
+    "item1": [
+      {
+        "price": 200,
+        "val2": 0.1,
+        "val1": 1,
+        "type": 0
+      },
+      {
+        "price": 2,
+        "val2": 0.2,
+        "val1": 2,
+        "type": 1
+      },
+      {
+        "price": 200,
+        "val2": 0.3,
+        "val1": 3,
+        "type": 0
+      },
+      {
+        "price": 200,
+        "val2": 0.4,
+        "val1": 4,
+        "type": 0
+      },
+      {
+        "price": 400,
+        "val2": 0.5,
+        "val1": 4,
+        "type": 0
+      },
+      {
+        "price": 600,
+        "val2": 0.6,
+        "val1": 4,
+        "type": 0
+      },
+      {
+        "price": 1200,
+        "val2": 0.7,
+        "val1": 4,
+        "type": 0
+      }
+    ],
+    "defCD": 10,
+    "format": "{0}s",
+    "id": 2,
+    "icoImg": "s_20",
+    "desc": "store.supply.fastshoot.des"
+  },
+  {
+    "uid": 2007,
+    "itemImg": "s_30",
+    "item1": [
+      {
+        "price": 200,
+        "val1": 1,
+        "type": 0
+      },
+      {
+        "price": 2,
+        "val1": 1.5,
+        "type": 1
+      },
+      {
+        "price": 200,
+        "val1": 2,
+        "type": 0
+      },
+      {
+        "price": 4,
+        "val1": 2.5,
+        "type": 1
+      },
+      {
+        "price": 500,
+        "val1": 3,
+        "type": 0
+      },
+      {
+        "price": 1200,
+        "val1": 3.5,
+        "type": 0
+      },
+      {
+        "price": 1600,
+        "val1": 4,
+        "type": 0
+      }
+    ],
+    "defCD": 10,
+    "format": "{0}s",
+    "id": 3,
+    "icoImg": "s_20",
+    "desc": "store.supply.niubility.des"
+  },
+  {
+    "uid": 2008,
+    "itemImg": "s_31",
+    "item1": [
+      {
+        "price": 200,
+        "val2": 0.1,
+        "val1": 1,
+        "type": 0
+      },
+      {
+        "price": 2,
+        "val2": 0.2,
+        "val1": 2,
+        "type": 1
+      },
+      {
+        "price": 200,
+        "val2": 0.3,
+        "val1": 3,
+        "type": 0
+      },
+      {
+        "price": 300,
+        "val2": 0.4,
+        "val1": 4,
+        "type": 0
+      },
+      {
+        "price": 400,
+        "val2": 0.6,
+        "val1": 5,
+        "type": 0
+      },
+      {
+        "price": 500,
+        "val2": 0.7,
+        "val1": 6,
+        "type": 0
+      },
+      {
+        "price": 600,
+        "val2": 0.8,
+        "val1": 7,
+        "type": 0
+      }
+    ],
+    "defCD": 10,
+    "format": "{0}s",
+    "id": 4,
+    "icoImg": "s_20",
+    "desc": "store.supply.fastreload.des"
+  }
+]

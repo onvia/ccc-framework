@@ -1,0 +1,47 @@
+[
+  {
+    "rewardValue": 100,
+    "rewardType": 0,
+    "reset": 1,
+    "id": 1,
+    "type": 0,
+    "isCUM": 0,
+    "target": 3
+  },
+  {
+    "rewardValue": 100,
+    "rewardType": 1,
+    "reset": 0,
+    "id": 2,
+    "type": 1,
+    "isCUM": 0,
+    "target": 2
+  },
+  {
+    "rewardValue": 100,
+    "rewardType": 0,
+    "reset": 0,
+    "id": 3,
+    "type": 2,
+    "isCUM": 1,
+    "target": 2
+  },
+  {
+    "rewardValue": 100,
+    "rewardType": 1,
+    "reset": 0,
+    "id": 4,
+    "type": 3,
+    "isCUM": 0,
+    "target": 3
+  },
+  {
+    "rewardValue": 100,
+    "rewardType": 0,
+    "reset": 0,
+    "id": 5,
+    "type": 4,
+    "isCUM": 0,
+    "target": 2
+  }
+]

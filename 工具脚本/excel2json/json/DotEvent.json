@@ -1,0 +1,93 @@
+{
+  "LevelItemGift": {
+    "yifansKey": "main",
+    "name": "关卡点礼物",
+    "id": 8,
+    "event": "LevelItemGift",
+    "type": 7
+  },
+  "StoreUnlock": {
+    "yifansKey": "main",
+    "name": "商店解锁",
+    "id": 11,
+    "event": "StoreUnlock",
+    "type": 7
+  },
+  "OnlineGift": {
+    "yifansKey": "main",
+    "name": "在线奖励",
+    "id": 1,
+    "event": "OnlineGift",
+    "type": 7
+  },
+  "OnlineGiftCopy": {
+    "yifansKey": "main",
+    "name": "在线奖励再来一份",
+    "id": 2,
+    "event": "OnlineGiftCopy",
+    "type": 7
+  },
+  "FailureView": {
+    "yifansKey": "failed",
+    "name": "游戏失败",
+    "id": 6,
+    "event": "FailureView",
+    "type": 7
+  },
+  "StoreUpgrade": {
+    "yifansKey": "main",
+    "name": "商店升级",
+    "id": 12,
+    "event": "StoreUpgrade",
+    "type": 7
+  },
+  "LevelPageGift": {
+    "yifansKey": "main",
+    "name": "关卡页礼物",
+    "id": 9,
+    "event": "LevelPageGift",
+    "type": 7
+  },
+  "Resurrection": {
+    "yifansKey": "failed",
+    "name": "复活",
+    "id": 7,
+    "event": "Resurrection",
+    "type": 7
+  },
+  "SCoin": {
+    "yifansKey": "main",
+    "name": "补充金币",
+    "id": 4,
+    "event": "SCoin",
+    "type": 7
+  },
+  "StoreBuy": {
+    "yifansKey": "main",
+    "name": "商店购买",
+    "id": 10,
+    "event": "StoreBuy",
+    "type": 7
+  },
+  "VictoryView": {
+    "yifansKey": "success",
+    "name": "游戏胜利",
+    "id": 5,
+    "event": "VictoryView",
+    "type": 7
+  },
+  "GameItemAdsBox": {
+    "yifansKey": "main",
+    "name": "游戏视频箱子",
+    "id": 13,
+    "event": "GameItemAdsBox",
+    "type": 7
+  },
+  "SEnergy": {
+    "yifansKey": "main",
+    "name": "补充体力",
+    "id": 3,
+    "event": "SEnergy",
+    "type": 7
+  }
+}

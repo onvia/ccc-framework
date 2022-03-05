@@ -1,0 +1,54 @@
+[{
+  "uid": 5001,
+  "gcount": 3,
+  "img": "C4",
+  "item1": [
+    {
+      "price": 200,
+      "val2": 3,
+      "val1": 3,
+      "type": 0
+    },
+    {
+      "price": 2,
+      "val1": 3.5,
+      "type": 1
+    },
+    {
+      "price": 200,
+      "val1": 4,
+      "type": 0
+    },
+    {
+      "price": 200,
+      "val1": 4.8,
+      "type": 0
+    },
+    {
+      "price": 200,
+      "val2": 5.34,
+      "type": 0
+    },
+    {
+      "price": 200,
+      "val2": 6,
+      "type": 0
+    },
+    {
+      "price": 200,
+      "val2": 7,
+      "type": 0
+    }
+  ],
+  "price": 200,
+  "defCount": 3,
+  "count": 7,
+  "name": "C4",
+  "id": 1,
+  "ceil": 5,
+  "video": [
+    2,
+    3,
+    6
+  ]
+}]
