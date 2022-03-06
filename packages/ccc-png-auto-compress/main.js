@@ -12,13 +12,14 @@ const cahceFolderTmp = 'png-compress-cache-tmp';
 
 let pngquantPath = null;
 
+let _ignoreList = [];
+
 module.exports = {
 
   load() {
     Editor.Builder.on('build-start', this.onBuildStart);
     Editor.Builder.on('before-change-files', this.onBeforeChangeFiles);
     // Editor.Builder.on('build-finished', this.onBuildFinished);
-    
   },
 
   unload() {
@@ -76,6 +77,14 @@ module.exports = {
   async onBeforeChangeFiles(options, callback) {
     const config = getConfig();
     if (config && config.enabled) {
+        _ignoreList = config.ignoreAssets;
+        let i = _ignoreList.length;
+        while(i--){
+            if(_ignoreList[i]==''){
+             arr.splice(i,1);
+            }
+        }
+           
       Editor.log('[PAC]', '准备压缩 PNG 资源');
 
       // 获取压缩引擎路径
@@ -134,7 +143,7 @@ module.exports = {
       
       await checkCacheFolderTmp();
       let tasks = [];
-      const list = ['res', 'assets', 'subpackages', 'remote'];
+      const list = ['res', 'assets','subpackages', 'remote']; // subpackages
       for (let i = 0; i < list.length; i++) {
         const resPath = Path.join(options.dest, list[i]);
         if (!Fs.existsSync(resPath)) continue;
@@ -204,11 +213,17 @@ function getConfig() {
 function compress(srcPath, compressOptions, queue, log) {
   FileUtil.map(srcPath, (filePath, stats) => {
     if (Path.extname(filePath) === '.png') {
-      queue.push(new Promise(res => {
 
-
-
+        queue.push(new Promise(res => {
         const _fileName = Path.basename(filePath);
+        const _name = _fileName.replace('.png','');
+        if(_ignoreList.includes(_name)){
+            log.failedCount++;
+            log.failedInfo += `\n - ${'Failed'.padEnd(13, ' ')} | ${filePath.replace(Editor.Project.path || Editor.projectPath, '')}`;
+            log.failedInfo += `\n ${''.padEnd(10, ' ')} - 失败原因：忽略当前文件的压缩`;
+            res();
+            return;
+        }
         let _cache = checkCache(filePath);
         if(_cache){
             log.succeedCount++;

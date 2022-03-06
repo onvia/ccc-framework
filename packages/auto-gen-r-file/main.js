@@ -298,7 +298,7 @@ function genRun() {
                     let urlarr = dburl1.split("/");
                     let extvar = "";
                     if(urlarr.length > 1){ // 取文件的文件夹名作为变量名的扩展
-                        extvar = "_"+urlarr[urlarr.length - 2];
+                        extvar = "_"+formatFilename(urlarr[urlarr.length - 2]);
                     }
 
                     let tmpvariable = variable + extvar

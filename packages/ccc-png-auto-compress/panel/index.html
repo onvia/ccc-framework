@@ -18,6 +18,28 @@
             </ui-prop> -->
         </div>
         <hr />
+
+        <div class="layout horizontal ${align-items}">
+            <div>忽略文件</div>
+            <span style="width: 10px;"></span>
+            <ui-button class="tiny transparent" @click="onClickPlus()">
+                <i class="icon-plus"></i>
+            </ui-button>
+        </div>
+            
+            
+            <div class="flex-1 layout horizontal" style="flex-wrap:wrap;">
+            <div v-for="(index,item) in ignoreAssets" track-by="$index">
+                <div class="asset-group layout horizontal" >
+                    <ui-asset type="texture" style="width: 200px;" v-value="item" droppable="asset"  tabindex="-1"></ui-asset>
+                    <span class="text"></span>
+                    <ui-button class="tiny transparent" @click="onClickDel(index)" tabindex="-1" >
+                        <i class="icon-minus"></i>
+                    </ui-button>
+                </div>
+                </div>
+            </div>
+        <hr />
         <ui-button class="button blue big" v-disabled="isSaving" @click="saveConfig()">保存</ui-button>
     </ui-box-container>
 </div>

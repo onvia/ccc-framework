@@ -1,3 +1,5 @@
+import { AssetLoader } from "../loader/AssetLoader";
+import { LoaderMgr } from "../loader/LoaderMgr";
 import { Align } from "./Align";
 import { UITriggerMode } from "./UITriggerMode";
 import { UIViewBase } from "./UIViewBase";
@@ -20,7 +22,30 @@ export interface UIQueueOpts<Options = any>{
     uiLoadedCallback?: (uiview)=> void;
 }
 
+class UILoaderPlugin implements LoaderPlugin{
+    name: string = "UILoaderPlugin";
+    onLoadComplete(path: string, asset: cc.Prefab, bundle: cc.AssetManager.Bundle) {
+        
+        UIMgr.getInstance().addToUIList(asset,path);
+    }
+    onLoadDirComplete(dir: string, assets: cc.Prefab[], bundle: cc.AssetManager.Bundle) {
+        let paths = [];
+        for (let i = 0; i < assets.length; i++) {
+            const asset = assets[i];
+            // @ts-ignore
+            let info = bundle.getAssetInfo(asset._uuid);
+            let path = info.path;
+            paths.push(path);
+        }
+        UIMgr.getInstance().addListToUIList(assets,paths);
+    }
+    onLoadSceneComplete(sceneName: string, scene: cc.SceneAsset, bundle: cc.AssetManager.Bundle) {
+    }
+    onRelease(path: string, asset: cc.Prefab) {
+        UIMgr.getInstance().removeUIFromList(asset,path);
+    }
 
+}
 export class UIMgr extends cc.EventTarget{
     public readonly Event = {
         All_VIEW_CLOSED: 'All_VIEW_CLOSED', 
@@ -30,6 +55,18 @@ export class UIMgr extends cc.EventTarget{
         CLOSE_VIEW: 'CLOSE_VIEW',
     };
     
+    private isLoaderInited = false;
+    get loader(): AssetLoader{
+        if(CC_EDITOR){
+            return;
+        }
+        let uiLoader = LoaderMgr.getInstance().get(LoaderMgr.getInstance().KEY_UI);
+        if(!this.isLoaderInited){
+            this.isLoaderInited = true;
+            uiLoader.registerPlugin(new UILoaderPlugin());
+        }
+        return uiLoader;
+    }
 
     //存储所有“UI窗体预设”路径
     //参数含义： 第1个string 表示“窗体预设”名称，后一个string 表示对应的路径
@@ -55,31 +92,32 @@ export class UIMgr extends cc.EventTarget{
     public static getInstance(): UIMgr {
         if (!this.instance) {
             this.instance = new UIMgr();
+            this.instance.loader;
         }
         return this.instance;
     }
 
-    //批量注册 ui // 尽量使用 loader.addDir({path:"",isDir: true}) 去批量注册
-    registerBatch(obj: any) {
-        console.warn('UIMgr-> 推荐使用： loader.addDir({path:"",isDir: true})');
-        for (const key in obj) {
-            const path = obj[key];
-            this.register(key, path);
-        }
+    // //批量注册 ui // 尽量使用 loader.addDir({path:"",isDir: true}) 去批量注册
+    // registerBatch(obj: any) {
+    //     console.warn('UIMgr-> 推荐使用： loader.addDir({path:"",isDir: true})');
+    //     for (const key in obj) {
+    //         const path = obj[key];
+    //         this.register(key, path);
+    //     }
 
-        this.logAllUI();
-    }
-    //尽量使用 loader.addUI({path:""}) 去注册
-    register(name: string, prefabpath: string) {
+    //     this.logAllUI();
+    // }
+    // //尽量使用 loader.addUI({path:""}) 去注册
+    // register(name: string, prefabpath: string) {
 
-        console.warn('UIMgr-> 推荐使用： loader.addUI({path:""})');
-        this._uiPaths[name] = prefabpath;
-        if (!(name in this._uiList)) {
-            cc.resources.load(prefabpath, cc.Prefab, function (err, prefab) {
-                this._UIList[name] = prefab;
-            }.bind(this));
-        }
-    }
+    //     console.warn('UIMgr-> 推荐使用： loader.addUI({path:""})');
+    //     this._uiPaths[name] = prefabpath;
+    //     if (!(name in this._uiList)) {
+    //         cc.resources.load(prefabpath, cc.Prefab, function (err, prefab) {
+    //             this._UIList[name] = prefab;
+    //         }.bind(this));
+    //     }
+    // }
 
 
     addListToUIList(prefabs: Array < cc.Prefab > , paths: Array < string > ) {
@@ -92,6 +130,11 @@ export class UIMgr extends cc.EventTarget{
     addToUIList(prefab: cc.Prefab, path: string) {
         this._uiPaths[prefab.name] = path;
         this._uiList[prefab.name] = prefab;
+    }
+
+    removeUIFromList(prefab: cc.Prefab, path: string){
+        delete this._uiPaths[prefab.name];
+        delete this._uiList[prefab.name];
     }
 
     //依次显示的界面队列
@@ -220,21 +263,23 @@ export class UIMgr extends cc.EventTarget{
             return showUIFunc(name, options);
         }
 
-        let bundle: cc.AssetManager.Bundle = await this.getBundle(opts.bundle);
+        let prefab = await this.loader.load(prefabpath,cc.Prefab,opts.bundle);
+        return showUIFunc(prefab.name, options);
+        // let bundle: cc.AssetManager.Bundle = await this.getBundle(opts.bundle);
         
-        if(!!bundle){
-           let prefab = await new Promise<cc.Prefab>((resolve,reject)=>{
-                bundle.load(prefabpath, cc.Prefab, function (err, prefab) {
-                    if(!err){
-                        resolve(prefab)
-                    }else{
-                        reject(err);
-                    }
-                }.bind(this));   
-            });
-            self.addToUIList(prefab, prefabpath);
-            return showUIFunc(prefab.name, options);
-        }
+        // if(!!bundle){
+        //    let prefab = await new Promise<cc.Prefab>((resolve,reject)=>{
+        //         bundle.load(prefabpath, cc.Prefab, function (err, prefab) {
+        //             if(!err){
+        //                 resolve(prefab)
+        //             }else{
+        //                 reject(err);
+        //             }
+        //         }.bind(this));   
+        //     });
+        //     self.addToUIList(prefab, prefabpath);
+        //     return showUIFunc(prefab.name, options);
+        // }
     }
     private async getBundle(bundleStr){
         let bundle: cc.AssetManager.Bundle = null;

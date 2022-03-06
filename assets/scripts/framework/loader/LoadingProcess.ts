@@ -36,7 +36,9 @@ export class LoadingProcess extends AssetLoader{
 
     public addTask(promise: Promise<any>){
         this._tasks.push(promise);
-        promise.then(()=> {this.onComplete(null,null);});
+        promise.then((asset)=> {
+            this.onComplete(null,asset);
+        });
     }
 
     public async taskStart(onLoadingListener: OnLoadingListener,duration){
@@ -74,13 +76,13 @@ export class LoadingProcess extends AssetLoader{
             this.onProgress(finish,total,item);
             onProgress?.(finish,total,item);
         }
+        // 保留，否则会在父类里面解析错误
+        _onComplete = async (error: Error, assets: any)=>{
+            // this.onComplete(error,assets);
+            onComplete?.(error,assets);
+        }
 
-        // _onComplete = async (error: Error, assets: any)=>{
-        //     this.onComplete(error,assets);
-        //     onComplete?.(error,assets);
-        // }
-
-        return super.load(paths,type,_onProgress,onComplete,bundle);
+        return super.load(paths,type,_onProgress,_onComplete,bundle);
     }
 
     public loadScene(sceneName: string,_bundle?:  cc.AssetManager.Bundle | string)
@@ -92,12 +94,12 @@ export class LoadingProcess extends AssetLoader{
             this.onProgress(finish,total,item);
             onProgress?.(finish,total,item);
         }
-
-        // _onComplete = async (error: Error, assets: any)=>{                                                                                                                                                               
-        //     await this.onComplete(error,assets);
-        //     onComplete?.(error,assets);
-        // }
-        return super.loadScene(sceneName,_onProgress,onComplete,bundle);
+        // 保留，否则会在父类里面解析错误
+        _onComplete = async (error: Error, assets: any)=>{                                                                                                                                                               
+            // await this.onComplete(error,assets);
+            onComplete?.(error,assets);
+        }
+        return super.loadScene(sceneName,_onProgress,_onComplete,bundle);
     }
 
 
@@ -113,13 +115,13 @@ export class LoadingProcess extends AssetLoader{
             this.onProgress(finish,total,item);
             onProgress?.(finish,total,item);
         }
+        // 保留，否则会在父类里面解析错误
+        _onComplete = async (error: Error, assets: any)=>{
+            // await this.onComplete(error,assets);
+            onComplete?.(error,assets);
+        }
 
-        // _onComplete = async (error: Error, assets: any)=>{
-        //     await this.onComplete(error,assets);
-        //     onComplete?.(error,assets);
-        // }
-
-        return super.loadDir(dir,type,_onProgress,onComplete,bundle);
+        return super.loadDir(dir,type,_onProgress,_onComplete,bundle);
     }
 
     public step (dt) {

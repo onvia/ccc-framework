@@ -1,5 +1,6 @@
 const Fs = require('fs');
 
+
 Editor.Panel.extend({
 
   style: Fs.readFileSync(Editor.url('packages://ccc-png-auto-compress/panel/index.css'), 'utf8'),
@@ -21,9 +22,23 @@ Editor.Panel.extend({
           speed: 3,
 
           isSaving: false,
+
+          ignoreAssets: [],
         }
       },
 
+      
+//       watch:{
+//         ignoreAssets: {
+// 　　　　    handler(newValue, oldValue) {
+//                 Editor.log(JSON.stringify(newValue));
+//     　　　　},
+//     　　　　deep: true
+//         }
+//       },
+    //   computed:{
+
+    //   },
       methods: {
 
         /**
@@ -40,6 +55,7 @@ Editor.Panel.extend({
             maxQuality: this.maxQuality,
             colors: this.colors,
             speed: this.speed,
+            ignoreAssets: this.ignoreAssets,
           };
           Editor.Ipc.sendToMain('ccc-png-auto-compress:save-config', config, () => {
             this.isSaving = false;
@@ -56,8 +72,18 @@ Editor.Panel.extend({
               this[key] = config[key];
             }
           });
+        },
+        onClickPlus(){
+            this.ignoreAssets.push('');
+        },
+        onClickDel(index){
+            // Editor.log("  index: "+index);
+          this.ignoreAssets.splice(index, 1);
+        },
+        onDropAsset(asset,index){
+            
+            Editor.log("asset: "+JSON.stringify(asset)+"   index: "+index);
         }
-
       }
     });
 

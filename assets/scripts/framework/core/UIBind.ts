@@ -8,7 +8,7 @@ const DEFAULT_EVENT_NAMES = [
 
 export class UIBind {
     private _prefix = '_';
-    _plugins = [];
+    private _plugins = [];
     public registerPlugin(plugins) {
         if(CC_EDITOR){
             return;

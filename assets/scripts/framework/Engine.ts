@@ -5,6 +5,7 @@ import { Toast } from "./gui/Toast";
 import { Keyboard } from "./input/Keyboard";
 import { Touch } from "./input/Touch";
 import { AssetLoader } from "./loader/AssetLoader";
+import { LoaderMgr } from "./loader/LoaderMgr";
 import { Mathf } from "./math/Mathf";
 import { Services } from "./services/Services";
 import { UIMgr } from "./ui/UIMgr";
@@ -22,6 +23,7 @@ class Engine{
     toast: Toast = Toast.getInstance();
     math: Mathf = Mathf.getInstance();
     uiMgr: UIMgr = UIMgr.getInstance();
+    loaderMgr: LoaderMgr = LoaderMgr.getInstance();
     
     nowTime(){
         cc.game.emit(this.EVENT_TIME_NOW,cc.sys.now());

@@ -8,10 +8,19 @@ declare global{
     type ProgressFn = (finish: number,total: number,item: cc.AssetManager.RequestItem)=> void;
     type CompleteFn = (error: Error, assets: any) => void;
     type PreLoadCompleteFn = (error: Error) => void;
+
+    interface LoaderPlugin{
+        name: string;
+        onLoadComplete(path: string, asset: cc.Asset,bundle: cc.AssetManager.Bundle);
+        onLoadDirComplete(path: string, assets: cc.Asset[],bundle: cc.AssetManager.Bundle);
+        onLoadSceneComplete(sceneName: string,scene: cc.SceneAsset,bundle: cc.AssetManager.Bundle);
+        onRelease(path: string, asset: cc.Asset);
+    }
 }
 
 
 class Cache{
+    // 考虑到 相同路径不同类型的资源，所以这里使用数组形式
     map :Map<string,Array<NormalAsset>>;
     constructor(){
         this.map = new Map();
@@ -69,7 +78,7 @@ class Cache{
                 const asset = arr[i];
                 callbackfn(asset,key,this);
             }
-        });
+        },thisArg);
     }
 
     clear(){
@@ -158,7 +167,51 @@ export class AssetLoader{
     }
 
     
+    protected plugins: LoaderPlugin[] = [];
+
     protected cache : Cache = new Cache();
+
+    public registerPlugin(plugins: LoaderPlugin | LoaderPlugin[]){
+        if(CC_EDITOR){
+            return;
+        }
+        if (!Array.isArray(plugins)) {
+            plugins = new Array(plugins);
+        }
+
+        plugins.forEach((plugin) => {
+            //插件能不重复
+            let findPlugin = this.plugins.some(item => item.name === plugin.name || item === plugin);
+            if (findPlugin) {
+                return;
+            }
+            this.plugins.push(plugin);
+        });
+    }
+
+    private onLoadComplete(path: string, asset: cc.Asset,bundle: cc.AssetManager.Bundle){
+        this.plugins.forEach((plugin)=>{
+            plugin.onLoadComplete(path, asset,bundle);
+        });
+    }
+
+    private onLoadDirComplete(path: string, assets: cc.Asset[],bundle: cc.AssetManager.Bundle){
+        this.plugins.forEach((plugin)=>{
+            plugin.onLoadDirComplete(path, assets,bundle);
+        });
+    }
+
+    private onRelease(path: string, asset: cc.Asset){
+        this.plugins.forEach((plugin)=>{
+            plugin.onRelease(path, asset);
+        });
+    }
+
+    private onLoadSceneComplete(sceneName: string,scene: cc.SceneAsset,bundle: cc.AssetManager.Bundle){
+        this.plugins.forEach((plugin)=>{
+            plugin.onLoadSceneComplete(sceneName, scene,bundle);
+        });
+    }
  
     // 先对包装层资源进行计数 --
     public releaseAsset( path : string, type: {prototype: cc.Asset}){
@@ -166,7 +219,8 @@ export class AssetLoader{
         if(asset){
             asset.decRef();
             if(asset.getRefCount() <= 0){
-                this.cache.delete(path,type);
+                let asset = this.cache.delete(path,type);
+                this.onRelease(asset.getPath(),asset.getAsset());
             }
         }
     }
@@ -175,6 +229,7 @@ export class AssetLoader{
     public releaseAll(){
         this.cache?.forEach((asset : NormalAsset)=>{
             asset.getAsset().decRef();
+            this.onRelease(asset.getPath(),asset.getAsset());
         });
         this.cache?.clear();
     }
@@ -209,7 +264,8 @@ export class AssetLoader{
     public load<T extends cc.Asset>(path: string, type: {prototype: T},_onProgress?: ProgressFn | CompleteFn | cc.AssetManager.Bundle | string,_onComplete?: CompleteFn | cc.AssetManager.Bundle | string,_bundle?:  cc.AssetManager.Bundle | string): Promise<T>{
         
         return new Promise<T>(async (resolve,reject)=>{
-            let {onProgress,onComplete,bundle} = this.parsingLoadArgs(_onProgress,_onComplete,_bundle);
+            let obj = this.parsingLoadArgs(_onProgress,_onComplete,_bundle);
+            let {onProgress,onComplete,bundle} = obj;
             let bundleAsset = await this.loadBundle(bundle);
 
 
@@ -234,7 +290,8 @@ export class AssetLoader{
                     let asset = new NormalAsset(path, assets, bundleAsset);
                     asset.addRef();
                     this.cache.set(u_path, asset);
-
+                    
+                    this.onLoadComplete(path,assets,bundleAsset.getBundle());
                     // await this.onComplete(error,assets);
                     await onComplete?.(error,assets);
                     resolve(assets);
@@ -270,6 +327,7 @@ export class AssetLoader{
                     noramlAsset.addRef();
                 });
 
+                this.onLoadDirComplete(dir,assets,bundleAsset.getBundle());
                 // await this.onComplete(error,assets);
                 await onComplete?.(error,assets);
                 resolve(assets);
@@ -296,6 +354,8 @@ export class AssetLoader{
                 onProgress?.(finish,total,item);
             },async (error: Error, assets: cc.SceneAsset)=>{
                 // await this.onComplete(error,assets);
+                
+                this.onLoadSceneComplete(sceneName,assets,bundleAsset.getBundle());
                 await onComplete?.(error,assets);
                 if(error){
                     reject(error);
@@ -346,7 +406,7 @@ export class AssetLoader{
     }
 
     protected parsingLoadArgs(... args){
-        let onProgress: ProgressFn,onComplete: CompleteFn,bundle: Bundle;
+        let onProgress: ProgressFn,onComplete: CompleteFn,bundle: string | Bundle;
         let _onProgress = args[0];
         let _onComplete = args[1];
         let _bundle = args[2];
@@ -370,7 +430,8 @@ export class AssetLoader{
                 bundle = _onProgress;
             }
         }
-        return {onProgress,onComplete,bundle};
+        let obj = {onProgress,onComplete,bundle};
+        return obj;
     }
 
     parseParameters (options, onProgress, onComplete, bundle) {
