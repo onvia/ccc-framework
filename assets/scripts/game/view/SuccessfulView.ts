@@ -8,13 +8,26 @@ const {ccclass,inspector, property} = cc._decorator;
 export default class SuccessfulView extends UIViewBase {
 
 
+    public get loader() {
+        return engine.loaderMgr.get(this.uuid);;
+    }
+
 
     start () {
 
         engine.uibind.bind(this);
-        let loader = engine.loaderMgr.get(SuccessfulView);
+        this.loadAsset();
         console.log(`SuccessfulView-> `);
     }
 
+    loadAsset(){
+        this.loader.loadDir("images/decor",cc.SpriteFrame);
+        this.loader.loadDir("images/skins",cc.SpriteFrame);
+    }
+
+    onClickHome(){
+        this.close();
+        engine.loaderMgr.releaseLoader(this.uuid);
+    }
     // update (dt) {}
 }

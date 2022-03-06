@@ -1609,7 +1609,7 @@
     "touchMaskType": 0,
     "closeType": 0,
     "autoCloseDuration": 1,
-    "isOnly": true,
+    "isOnly": false,
     "isClearStack": false,
     "_maskOpacity": 230,
     "_id": ""
